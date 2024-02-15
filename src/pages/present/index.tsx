@@ -107,6 +107,7 @@ export function PresentPage() {
                   fontWeight={700}
                   fontSize={32}
                   color="white"
+                  textAlign="center"
                 >
                   {question.title}
                 </Typography>
