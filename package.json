@@ -1,5 +1,6 @@
 {
   "name": "quester",
+  "homepage": "https://jamnguyen.github.io/quester/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
