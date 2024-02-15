@@ -57,13 +57,14 @@ export function TopicNewItem({
       <CardActions>
         <Button
           variant="text"
-          onClick={() =>
+          onClick={() => {
             onSubmit({
               id: '' + new Date().getTime(),
               title,
               questions: [],
-            })
-          }
+            });
+            setTitle('');
+          }}
         >
           Add
         </Button>
