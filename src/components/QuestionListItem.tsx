@@ -5,7 +5,6 @@ import {
   Card,
   CardActions,
   CardContent,
-  CardHeader,
   IconButton,
   Stack,
   TextField,
@@ -15,7 +14,7 @@ import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import { ChangeEvent, useState } from 'react';
 
-const cardHeight = 240;
+const cardHeight = 300;
 
 export function QuestionListItem({
   data,
@@ -26,8 +25,11 @@ export function QuestionListItem({
 }) {
   return (
     <Card sx={{ height: cardHeight }}>
-      <CardHeader title={data.title} />
       <CardContent>
+        <Typography fontWeight={600} mb={1}>
+          {data.title}
+        </Typography>
+        <Typography mb={1}>{data.answer}</Typography>
         <Typography mb={1}>
           Ảnh gợi ý: {data.hintImgURL || 'Không cóa'}
         </Typography>
@@ -57,11 +59,16 @@ export function QuestionNewItem({
   onSubmit: (newItem: Question) => void;
 }) {
   const [title, setTitle] = useState('');
+  const [answer, setAnswer] = useState('');
   const [hintImgURL, setHintImgURL] = useState('');
   const [allowHopeStar, setAllowHopeStar] = useState(false);
 
   const onTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
+  };
+
+  const onAnswerChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setAnswer(e.target.value);
   };
 
   const onHintChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -79,9 +86,17 @@ export function QuestionNewItem({
             onChange={onTitleChange}
           />
         </Box>
+        <Box mb={2}>
+          <TextField
+            label="Đáp án"
+            fullWidth
+            value={answer}
+            onChange={onAnswerChange}
+          />
+        </Box>
         <Box mb={1}>
           <TextField
-            label="Link ảnh gợi ý (không bắt buộc)"
+            label="Link ảnh gợi ý (optional)"
             fullWidth
             value={hintImgURL}
             onChange={onHintChange}
@@ -108,10 +123,12 @@ export function QuestionNewItem({
           variant="text"
           onClick={() => {
             setTitle('');
+            setAnswer('');
             setHintImgURL('');
             setAllowHopeStar(false);
             onSubmit({
               title,
+              answer,
               hintImgURL,
               allowHopeStar,
             });

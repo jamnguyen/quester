@@ -43,6 +43,7 @@ export function PresentPage() {
   const topic = useSelector(selectTopic(id));
 
   const [questions, setQuestions] = useState(topic?.questions || []);
+  const [shouldShowAnswer, setShouldAnswerShown] = useState(false);
   const [question, setQuestion] = useState<Question>();
   const containerRef = useRef<HTMLDivElement>(null);
   const [bgColors, setBgColors] = useState<string[]>(['#fff', '#fff']);
@@ -57,12 +58,18 @@ export function PresentPage() {
   const onNext = () => {
     if (!questions.length) navigate(ROUTE.HOME);
 
+    if (!shouldShowAnswer) {
+      setShouldAnswerShown(true);
+      return;
+    }
+
     const newQuestions = [...questions];
     const nextIndex = randomInteger(0, newQuestions.length - 1);
     const nextQuestion = newQuestions[nextIndex];
     newQuestions.splice(nextIndex, 1);
     setQuestions(newQuestions);
     setQuestion(nextQuestion);
+    setShouldAnswerShown(false);
   };
 
   if (!topic) return null;
@@ -84,19 +91,32 @@ export function PresentPage() {
       >
         {question ? (
           <>
-            <Typography
-              variant="h1"
-              fontWeight={700}
-              fontSize={32}
-              color="white"
-            >
-              {question.title}
-            </Typography>
-            {question.hintImgURL && (
-              <img src={question.hintImgURL} style={{ maxWidth: 800 }} />
-            )}
-            {question.allowHopeStar && (
-              <AnimatedStar htmlColor="#fff" sx={{ fontSize: 80 }} />
+            {shouldShowAnswer ? (
+              <Typography
+                variant="h1"
+                fontWeight={700}
+                fontSize={32}
+                color="white"
+              >
+                Đáp án: {question.answer}
+              </Typography>
+            ) : (
+              <>
+                <Typography
+                  variant="h1"
+                  fontWeight={700}
+                  fontSize={32}
+                  color="white"
+                >
+                  {question.title}
+                </Typography>
+                {question.hintImgURL && (
+                  <img src={question.hintImgURL} style={{ maxWidth: 800 }} />
+                )}
+                {question.allowHopeStar && (
+                  <AnimatedStar htmlColor="#fff" sx={{ fontSize: 80 }} />
+                )}
+              </>
             )}
           </>
         ) : (
