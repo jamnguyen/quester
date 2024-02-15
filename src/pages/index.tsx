@@ -4,17 +4,22 @@ import { ROUTE } from '@/constants';
 import { EditPage } from './edit';
 import { PresentPage } from './present';
 
-export const router = createBrowserRouter([
+export const router = createBrowserRouter(
+  [
+    {
+      path: ROUTE.HOME,
+      element: <HomePage />,
+    },
+    {
+      path: ROUTE.EDIT,
+      element: <EditPage />,
+    },
+    {
+      path: ROUTE.PRESENT,
+      element: <PresentPage />,
+    },
+  ],
   {
-    path: ROUTE.HOME,
-    element: <HomePage />,
+    basename: '/quester',
   },
-  {
-    path: ROUTE.EDIT,
-    element: <EditPage />,
-  },
-  {
-    path: ROUTE.PRESENT,
-    element: <PresentPage />,
-  }
-]);
+);
