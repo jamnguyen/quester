@@ -11,11 +11,11 @@ export const router = createBrowserRouter(
       element: <HomePage />,
     },
     {
-      path: ROUTE.EDIT,
+      path: `${ROUTE.EDIT}/:id`,
       element: <EditPage />,
     },
     {
-      path: ROUTE.PRESENT,
+      path: `${ROUTE.PRESENT}/:id`,
       element: <PresentPage />,
     },
   ],
