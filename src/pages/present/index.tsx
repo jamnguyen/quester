@@ -56,12 +56,12 @@ export function PresentPage() {
   }, []);
 
   const onNext = () => {
-    if (!questions.length) navigate(ROUTE.HOME);
-
     if (!shouldShowAnswer) {
       setShouldAnswerShown(true);
       return;
     }
+
+    if (!questions.length) navigate(ROUTE.HOME);
 
     const newQuestions = [...questions];
     const nextIndex = randomInteger(0, newQuestions.length - 1);
