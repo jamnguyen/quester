@@ -87,6 +87,7 @@ export function PresentPage() {
           alignItems: 'center',
           justifyContent: 'center',
           gap: 4,
+          padding: 2,
         }}
       >
         {question ? (
