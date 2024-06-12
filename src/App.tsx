@@ -7,6 +7,8 @@ import { router } from './pages';
 import { persistor, store } from './redux';
 
 export function App() {
+  console.log('Message from Jam', import.meta.env.VITE_JAM_MESSAGE);
+
   return (
     <ReduxProvider store={store}>
       <PersistGate loading={null} persistor={persistor}>
